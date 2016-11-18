@@ -3,6 +3,7 @@ package Utils;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +15,10 @@ import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -23,7 +26,7 @@ import okhttp3.Response;
  */
 public class OkHttpUtils {
     private static OkHttpClient okHttpClient;
-    private static OkHttpUtils inStance = null;
+    private static OkHttpUtils Instance = null;
     private final Handler mHandler;
 
     private OkHttpUtils(Context context) {
@@ -39,12 +42,12 @@ public class OkHttpUtils {
     }
 
     public static OkHttpUtils getInstance(Context context) {
-        if (inStance == null) {
+        if (Instance == null) {
             synchronized (OkHttpUtils.class) {
-                inStance = new OkHttpUtils(context);
+                Instance = new OkHttpUtils(context);
             }
         }
-        return inStance;
+        return Instance;
     }
 
     /**
@@ -205,6 +208,7 @@ public class OkHttpUtils {
                 }
             });
         }
+
     }
 
 

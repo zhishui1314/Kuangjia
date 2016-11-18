@@ -5,21 +5,68 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.anke.vehicle.kuangjia.MainActivity">
-<Button
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="volleyget的使用"
-    android:onClick="vget"/>
+    android:layout_height="wrap_content">
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="volleypost的使用"
+        android:text="volleyget"
+        android:onClick="vget"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="volleypost"
         android:onClick="vpost"/>
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="加载大图片的使用"
+        android:text="加载大图片"
         android:onClick="vtu"/>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="okhttpget"
+            android:onClick="okget"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="okhttpgetSync"
+            android:onClick="okgetsync"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="okhttppost"
+            android:onClick="okpost"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="okhttppostSync"
+            android:onClick="okpostsync"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上传文件"
+            android:onClick="upwenjian"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上传图片"
+            android:onClick="uptupiian"/>
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
