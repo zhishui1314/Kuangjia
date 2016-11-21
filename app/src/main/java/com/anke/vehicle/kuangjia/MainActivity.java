@@ -130,9 +130,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void upwenjian(View view){
-        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"/Demo1.txt");
-        final boolean exists = file.exists();
-        OkHttpUtils.getInstance(MainActivity.this).postAsynFile(upUrl,file);
-    }
+
 }
