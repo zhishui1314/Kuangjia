@@ -1,8 +1,10 @@
 package com.anke.vehicle.kuangjia;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -46,10 +48,20 @@ public class MainActivity extends AppCompatActivity {
 
                 if (current == total) {
                     progressDialog.dismiss();
+                    //安装apk
+                    File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/AnchorVehicle.apk");
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setDataAndType(Uri.fromFile(file),
+                            "application/vnd.android.package-archive");
+                    startActivity(intent);
                 }
             }
         }
     };
+
+
+
     private long total;
     private ProgressDialog progressDialog;
 
@@ -177,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void downLoad(View view) {
-        OkHttpUtils.getInstance(this).dogetDownload(imgUrl, new Callback() {
+        OkHttpUtils.getInstance(this).dogetDownload(video, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.e("下载失败", "111");
@@ -202,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void down(Response response) {
-        total = response.body().contentLength();
+        total = response.body().contentLength();//可以获取总体的长度
         InputStream inputStream = response.body().byteStream();
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/AnchorVehicle.apk";
         byte[] buff = new byte[1024];
@@ -211,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             fileOutputStream = new FileOutputStream(new File(path));
             while ((length = inputStream.read(buff)) != -1) {
-                sum = sum + length;
+                sum = sum + length;//循环一次获取一次数据大小
                 Log.e("进度", sum + "");
                 fileOutputStream.write(buff, 0, length);
                 Message message = handler.obtainMessage();
