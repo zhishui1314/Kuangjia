@@ -11,14 +11,14 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.SSLSocketFactory;
+
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -140,32 +140,6 @@ public class OkHttpUtils {
     }
 
     /**
-     * 下载图片
-     *
-     * @param url
-     * @param onPictureListener 自定义的接口，向外暴漏，以便传值
-     */
-    public void dogetSyncPicture(String url, final OnPictureListener onPictureListener) {
-        Request request = new Request.Builder().url(url).build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        onPictureListener.onResult(response.body().byteStream());
-                    }
-                });
-            }
-        });
-    }
-
-    /**
      * post异步请求
      *
      * @param url
@@ -211,7 +185,39 @@ public class OkHttpUtils {
 
     }
 
+    /**
+     * 下载大型文件，或者安装app
+     */
+    public void dogetDownload(String url, final Callback callback) {
+        Request request = new Request.Builder().url(url).build();
+        okHttpClient.newCall(request).enqueue(callback);
+    }
 
+    /**
+     * 下载图片 主线程
+     * @param url
+     * @param onPictureListener
+     */
+    public void downLoadPicture(String url, final OnPictureListener onPictureListener){
+        Request request = new Request.Builder().url(url).build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("下载图片失败",e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+               mHandler.post(new Runnable() {
+                   @Override
+                   public void run() {
+                       onPictureListener.onResult(response.body().byteStream());
+                   }
+               });
+
+            }
+        });
+    }
     public interface OnResultListener {
         void onResult(String onResult);
     }

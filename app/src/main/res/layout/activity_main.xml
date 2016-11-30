@@ -59,13 +59,13 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="上传文件"
-            android:onClick="upwenjian"/>
+            android:text="下载文件"
+            android:onClick="downLoad"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="上传图片"
-            android:onClick="uptupiian"/>
+            android:text="下载图片"
+            android:onClick="downloadTUpian"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"

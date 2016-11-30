@@ -10,6 +10,9 @@ import permissiongen.PermissionFail;
 import permissiongen.PermissionGen;
 import permissiongen.PermissionSuccess;
 
+/**
+ * android6.0所有权限获取
+ */
 public class Main2Activity extends AppCompatActivity {
 
     @Override
